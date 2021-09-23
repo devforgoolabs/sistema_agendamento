@@ -31,7 +31,7 @@ public class UnidadeService {
         return repository.save(unidade);
     }
 
-    public Unidade atualizar(Long id, Unidade unidade) {
+    public Unidade atualizar(Long id, Unidade planoService) {
         Optional<Unidade> unidadeSalva = repository.findById(id);
 
         if (unidadeSalva.isEmpty()){
@@ -39,7 +39,7 @@ public class UnidadeService {
                     "Objeto não encontrado! Id: " + id + ", Tipo: " + Unidade.class.getName());
         }
 
-        BeanUtils.copyProperties(unidade, unidadeSalva.get(), "id");
+        BeanUtils.copyProperties(planoService, unidadeSalva.get(), "id");
         return repository.save(unidadeSalva.get());
     }
 

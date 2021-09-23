@@ -1,12 +1,10 @@
 package com.goolab.models;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Especialidade implements Serializable{
@@ -17,15 +15,15 @@ public class Especialidade implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String tipo;
+
 	private Atributos atributos;
 	
 	public Especialidade() {
 	}
-	
-	public Especialidade(Long id, String tipo, Atributos atributos) {
+
+	public Especialidade(Long id, String tipo) {
 		this.id = id;
 		this.tipo = tipo;
-		this.atributos = atributos;
 	}
 
 	public Long getId() {
@@ -43,6 +41,7 @@ public class Especialidade implements Serializable{
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
 
 	public Atributos getAtributos() {
 		return atributos;
@@ -68,8 +67,5 @@ public class Especialidade implements Serializable{
 		Especialidade other = (Especialidade) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-
 	
 }

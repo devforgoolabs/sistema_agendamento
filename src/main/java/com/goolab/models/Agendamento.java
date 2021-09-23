@@ -28,8 +28,7 @@ public class Agendamento implements Serializable{
 
 	}
 
-	public Agendamento(Long id, Prestador prestador, Unidade unidade, Especialidade especialidade, Servico servico,
-			PlanoSaude planoSaude, Horario horario, Paciente paciente) {
+	public Agendamento(Long id, Prestador prestador, Unidade unidade, Especialidade especialidade, Servico servico, PlanoSaude planoSaude, Horario horario, Paciente paciente) {
 		this.id = id;
 		this.prestador = prestador;
 		this.unidade = unidade;
@@ -105,22 +104,15 @@ public class Agendamento implements Serializable{
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Agendamento that = (Agendamento) o;
+		return id.equals(that.id);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Agendamento other = (Agendamento) obj;
-		return Objects.equals(id, other.id);
+	public int hashCode() {
+		return Objects.hash(id);
 	}
-	
-	
-
 }
