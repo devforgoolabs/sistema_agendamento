@@ -1,12 +1,11 @@
 package com.goolab.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Agendamento implements Serializable{
@@ -16,27 +15,55 @@ public class Agendamento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "prestador_id")
 	private Prestador prestador;
+
+	@ManyToOne
+	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
+
+	@ManyToOne
+	@JoinColumn(name = "especialidade_id")
 	private Especialidade especialidade;
+
+	@ManyToOne
 	private Servico servico;
-	private PlanoSaude planoSaude;
+
+	@ManyToOne
+	@JoinColumn(name = "horario_id")
 	private Horario horario;
+
+	@ManyToOne
+	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
-	
+
+	@OneToOne
+	@JoinColumn(name = "planosaude_id")
+	private PlanoSaude planosaude;
+
+	public PlanoSaude getPlanosaude() {
+		return planosaude;
+	}
+
+	public void setPlanosaude(PlanoSaude planosaude) {
+		this.planosaude = planosaude;
+	}
+
 	public Agendamento() {
 
 	}
 
-	public Agendamento(Long id, Prestador prestador, Unidade unidade, Especialidade especialidade, Servico servico, PlanoSaude planoSaude, Horario horario, Paciente paciente) {
+	public Agendamento(Long id, Prestador prestador, Unidade unidade, Especialidade especialidade, Servico servico, Horario horario, Paciente paciente, PlanoSaude planosaude) {
 		this.id = id;
 		this.prestador = prestador;
 		this.unidade = unidade;
 		this.especialidade = especialidade;
 		this.servico = servico;
-		this.planoSaude = planoSaude;
 		this.horario = horario;
 		this.paciente = paciente;
+		this.planosaude = planosaude;
 	}
 
 	public Long getId() {
@@ -77,14 +104,6 @@ public class Agendamento implements Serializable{
 
 	public void setServico(Servico servico) {
 		this.servico = servico;
-	}
-
-	public PlanoSaude getPlanoSaude() {
-		return planoSaude;
-	}
-
-	public void setPlanoSaude(PlanoSaude planoSaude) {
-		this.planoSaude = planoSaude;
 	}
 
 	public Horario getHorario() {

@@ -1,12 +1,10 @@
 package com.goolab.models;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Servico implements Serializable {
@@ -19,6 +17,9 @@ public class Servico implements Serializable {
 	private String nome;
 	private Double valor;
 	private String descricao;
+
+	@OneToMany(mappedBy = "servico")
+	private List<Agendamento> agendamento;
 	
 	public Servico() {
 	}

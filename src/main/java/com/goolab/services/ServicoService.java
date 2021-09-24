@@ -44,8 +44,8 @@ public class ServicoService {
         return repository.save(servicoSalva.get());
     }
 
-    public Optional<Servico> buscarPessoaCodigo(Long codigo) {
-        Optional<Servico> servicoSalva = repository.findById(codigo);
+    public Optional<Servico> buscarPessoaCodigo(Long id) {
+        Optional<Servico> servicoSalva = repository.findById(id);
         if (servicoSalva.isEmpty()) {
             throw new EmptyResultDataAccessException(1);
         }

@@ -16,7 +16,12 @@ public class Especialidade implements Serializable{
 	private Long id;
 	private String tipo;
 
+	@ManyToOne
+	@JoinColumn(name = "atributos_id")
 	private Atributos atributos;
+
+	@OneToMany(mappedBy = "especialidade")
+	private List<Agendamento> agendamentos;
 	
 	public Especialidade() {
 	}
@@ -49,6 +54,14 @@ public class Especialidade implements Serializable{
 
 	public void setAtributos(Atributos atributos) {
 		this.atributos = atributos;
+	}
+
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
 	}
 
 	@Override
