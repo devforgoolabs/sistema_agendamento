@@ -17,8 +17,8 @@ public class DataConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource data = new DriverManagerDataSource();
         data.setUrl("jdbc:mysql://localhost:3306/agendamento");
-        data.setUsername("");
-        data.setPassword("");
+        data.setUsername("root");
+        data.setPassword("2580");
         return data;
     }
 
