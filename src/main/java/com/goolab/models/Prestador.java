@@ -1,5 +1,7 @@
 package com.goolab.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class Prestador implements Serializable{
 	private String nome;
 	private String descricao;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "prestador")
 	private List<Agendamento> agendamento;
 	

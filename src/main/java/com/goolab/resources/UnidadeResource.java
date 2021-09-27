@@ -5,8 +5,6 @@ import com.goolab.models.Unidade;
 import com.goolab.services.UnidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -39,8 +37,9 @@ public class UnidadeResource {
     }
 
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody @Valid Unidade unidade){
-        Unidade obj = service.inserir(unidade);
+    public ResponseEntity<?> inserir(@RequestBody @Valid UnidadeDTO unidadeDto){
+        Unidade obj = service.fromDTO(unidadeDto);
+        obj = service.inserir(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(String.format("Salvo com Sucesso!! \nId: " + obj.getId()
@@ -49,8 +48,9 @@ public class UnidadeResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@RequestBody Unidade planoService, @PathVariable Long id){
-        Unidade planoServiceAtual = service.atualizar(id, planoService);
+    public ResponseEntity<?> atualizar(@Valid @RequestBody UnidadeDTO dto, @PathVariable Long id){
+        Unidade obj = service.fromDTO(dto);
+        Unidade unidade = service.atualizar(id, obj);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }

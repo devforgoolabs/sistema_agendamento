@@ -18,6 +18,7 @@ public class Atributos implements Serializable{
 	private String nome;
 	private String grupo;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "atributos")
 	private List<Especialidade> especialidade;
 	

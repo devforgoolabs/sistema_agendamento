@@ -1,5 +1,6 @@
 package com.goolab.services;
 
+import com.goolab.dto.UnidadeDTO;
 import com.goolab.models.Unidade;
 import com.goolab.repositories.UnidadeRepository;
 import com.goolab.services.exception.DataInvalid;
@@ -62,5 +63,9 @@ public class UnidadeService {
     public Page<Unidade> buscarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repository.findAll(pageRequest);
+    }
+
+    public Unidade fromDTO(UnidadeDTO dto){
+        return new Unidade(dto.getId(), dto.getNome());
     }
 }

@@ -1,5 +1,7 @@
 package com.goolab.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,6 +19,7 @@ public class  PlanoSaude implements Serializable{
 	private String nome;
 	private String descricao;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "planosaude")
 	private Agendamento agendamento;
 	

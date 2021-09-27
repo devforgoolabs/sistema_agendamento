@@ -1,7 +1,10 @@
 package com.goolab.dto;
 
 import com.goolab.models.Unidade;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class UnidadeDTO implements Serializable {
@@ -10,12 +13,14 @@ public class UnidadeDTO implements Serializable {
 
     private Long id;
 
+    @NotBlank(message = "Campo Obrigatório")
+    @Length(min = 3, max = 50)
     private String nome;
 
     public UnidadeDTO() {
     }
 
-    public UnidadeDTO(Unidade obj) {
+    public UnidadeDTO(@NotNull Unidade obj) {
         id = obj.getId();
         nome = obj.getNome();
     }
