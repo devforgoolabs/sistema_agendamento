@@ -1,5 +1,6 @@
 package com.goolab.resources;
 
+import com.goolab.dto.PacienteDTO;
 import com.goolab.models.Paciente;
 import com.goolab.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@RestController
+@RequestMapping("/pacientes")
 public class PacienteResource {
 
     @Autowired
     private PacienteService service;
 
     @GetMapping
-    public List<Paciente> listar(){
-        return service.listar();
+    public ResponseEntity<List<PacienteDTO>> listar(){
+        List<Paciente> list = service.listar();
+        List<PacienteDTO> listDto = list.stream().map(obj -> new PacienteDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
 

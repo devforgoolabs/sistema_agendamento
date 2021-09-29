@@ -1,5 +1,6 @@
 package com.goolab.resources;
 
+import com.goolab.dto.EspecialidadeDTO;
 import com.goolab.models.Especialidade;
 import com.goolab.services.EspecialidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/especialidades")
@@ -19,8 +21,10 @@ public class EspecialidadeResource {
     private EspecialidadeService service;
 
     @GetMapping
-    public List<Especialidade> listar(){
-        return service.listar();
+    public ResponseEntity<List<EspecialidadeDTO>> listar(){
+        List<Especialidade> list = service.listar();
+        List<EspecialidadeDTO> listDto = list.stream().map(EspecialidadeDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
 

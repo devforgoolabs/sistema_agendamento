@@ -1,6 +1,9 @@
 package com.goolab.services;
 
+import com.goolab.dto.EspecialidadeDTO;
+import com.goolab.dto.UnidadeDTO;
 import com.goolab.models.Especialidade;
+import com.goolab.models.Unidade;
 import com.goolab.repositories.EspecialidadeRepository;
 import com.goolab.services.exception.ObjectNotFoundException;
 import org.springframework.beans.BeanUtils;
@@ -58,5 +61,9 @@ public class EspecialidadeService {
             throw new ObjectNotFoundException("Objeto com o Id: " + id + " Não existe!!");
         }
         repository.deleteById(id);
+    }
+
+    public Especialidade fromDTO(EspecialidadeDTO dto){
+        return new Especialidade(dto.getId(), dto.getTipo());
     }
 }

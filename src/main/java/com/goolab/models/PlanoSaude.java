@@ -17,7 +17,6 @@ public class  PlanoSaude implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String descricao;
 
 	@JsonIgnore
 	@OneToOne(mappedBy = "planosaude")
@@ -26,12 +25,15 @@ public class  PlanoSaude implements Serializable{
 	public PlanoSaude() {
 	}
 	
-	public PlanoSaude(Long id, String nome, String descricao) {
+	public PlanoSaude(Long id, String nome) {
 		this.id = id;
 		this.nome = nome;
-		this.descricao = descricao;
 	}
-	
+
+	public PlanoSaude(String nome) {
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -47,15 +49,7 @@ public class  PlanoSaude implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public String getDescricao() {
-		return descricao;
-	}
-	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

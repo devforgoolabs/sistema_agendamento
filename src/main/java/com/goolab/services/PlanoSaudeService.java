@@ -1,5 +1,6 @@
 package com.goolab.services;
 
+import com.goolab.dto.PlanoSaudeDTO;
 import com.goolab.models.PlanoSaude;
 import com.goolab.repositories.PlanoSaudeRepository;
 import com.goolab.services.exception.ObjectNotFoundException;
@@ -59,5 +60,9 @@ public class PlanoSaudeService {
             throw new ObjectNotFoundException("Objeto com o Id: " + id + " Não existe!!");
         }
         repository.deleteById(id);
+    }
+
+    public PlanoSaude fromDto(PlanoSaudeDTO dto){
+        return new PlanoSaude(dto.getNome());
     }
 }

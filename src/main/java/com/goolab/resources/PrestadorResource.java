@@ -1,5 +1,6 @@
 package com.goolab.resources;
 
+import com.goolab.dto.PrestadorDTO;
 import com.goolab.models.Prestador;
 import com.goolab.services.PrestadorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/prestadores")
@@ -19,8 +21,10 @@ public class PrestadorResource {
     private PrestadorService service;
 
     @GetMapping
-    public List<Prestador> listar(){
-        return service.listar();
+    public ResponseEntity<List<PrestadorDTO>> listar(){
+        List<Prestador> list = service.listar();
+        List<PrestadorDTO> listDto = list.stream().map(obj -> new PrestadorDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping("/{id}")

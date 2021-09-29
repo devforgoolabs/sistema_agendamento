@@ -1,5 +1,6 @@
 package com.goolab.resources;
 
+import com.goolab.dto.PlanoSaudeDTO;
 import com.goolab.models.PlanoSaude;
 import com.goolab.services.PlanoSaudeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/planosaude")
@@ -19,8 +21,10 @@ public class PlanoSaudeResource {
     private PlanoSaudeService service;
 
     @GetMapping
-    public List<PlanoSaude> listar(){
-        return service.listar();
+    public ResponseEntity<List<PlanoSaudeDTO>> listar(){
+        List<PlanoSaude> list = service.listar();
+        List<PlanoSaudeDTO> listDto = list.stream().map(obj -> new PlanoSaudeDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
 
